@@ -1,5 +1,6 @@
 package ru.kata.appspringboot.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -11,7 +12,7 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Table(name = "users", indexes = {
         @Index(name = "email", columnList = "email", unique = true)
 })
@@ -54,7 +55,8 @@ public class User implements UserDetails {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id.equals(user.id) && firstName.equals(user.firstName) && lastName.equals(user.lastName) && age.equals(user.age) && email.equals(user.email);
+        return id.equals(user.id) && firstName.equals(user.firstName) && lastName.equals(user.lastName)
+                && age.equals(user.age) && email.equals(user.email);
     }
 
     @Override
